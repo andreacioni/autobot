@@ -1,0 +1,66 @@
+[
+    {
+        "id" : "main",
+        "on" : "start",
+        "group" : ["MAIN_G"],
+        "to_group" : "MAIN_G",
+        "entry_point" : true,
+        "handler_type" : "COMMAND",
+        "response_type" : "TEXT",
+        "response" : "🤖 Welcome in <b>AutoBot</b>! 🤖\nExample: <i>terminal</i>",
+        "response_parse_mode" : "HTML",
+        "keyboard_options" : [
+            ["startpromtp"], 
+            ["close"]
+        ],
+        "one_time_keyboard" : false,
+        "resize_keyboard" : true
+    }, {
+        "id" : "startpromtp",
+        "on" : "Start prompt $> 🖥",
+        "group" : ["MAIN_G"],
+        "to_group" : "COMMAND_G",
+        "handler_type" : "MESSAGE",
+        "response_type" : "TEXT",
+        "response" : "Prompt is now open!\nFeel free to send every command you want here.\nUse /cancel to end this session.",
+        "keyboard_options" : null
+    }, {
+        "id" : "cancel",
+        "on" : "cancel",
+        "group" : ["COMMAND_G"],
+        "to_group" : "MAIN_G",
+        "handler_type" : "COMMAND",
+        "response_type" : "TEXT",
+        "response" : "Prompt is closed.",
+        "keyboard_options" : "main",
+        "one_time_keyboard" : false,
+        "resize_keyboard" : true
+    }, {
+        "id" : "command",
+        "on" : "^(?!/cancel$).*$",
+        "group" : ["COMMAND_G"],
+        "handler_type" : "REGEX",
+        "response_type" : "COMMAND",
+        "response_type_options" : {
+            "on_shell" : true,
+            "send_exit_code" : true,
+            "send_stdout" : true,
+            "send_stderr" : true,
+            "timeout" : 10
+        },
+        "response" : "{message.text}",
+        "keyboard_options" : [
+            ["cancel"]
+        ],
+        "one_time_keyboard" : false,
+        "resize_keyboard" : true
+    }, {
+        "id" : "close",
+        "on" : "Close 🚫",
+        "group" : ["MAIN_G"],
+        "exit_point" : true,
+        "response" : "Goodbye! 👋\n\nYou could restart this bot by sending /start again",
+        "handler_type" : "MESSAGE",
+        "keyboard_options" : null
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {
+        "id" : "main",
+        "on" : "start",
+        "entry_point" : true,
+        "handler_type" : "COMMAND",
+        "response_type" : "PHOTO",
+        "response" : "https://avatars2.githubusercontent.com/u/7473284?s=460&v=4",
+        "exit_point" : true
+        
+    }
+]

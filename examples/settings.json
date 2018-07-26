@@ -1,0 +1,7 @@
+{
+    "api_key" : "[YOUR API KEY]",
+    "workers" : 4,
+    "restrict_chat_ids" : true,
+    "accept_chat_ids" : [1234, 9876],
+    "allow_reentry" : true
+}

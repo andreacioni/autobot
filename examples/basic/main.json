@@ -1,0 +1,79 @@
+[
+    {
+        "id" : "main",
+        "on" : "start",
+        "entry_point" : true,
+        "handler_type" : "COMMAND",
+        "response_type" : "TEXT",
+        "response" : "🤖 Welcome in <b>AutoBot</b>! 🤖\nDo you like me?", 
+        "response_parse_mode" : "HTML",
+        "keyboard_options" : [
+            ["yes"], 
+            ["no"]
+        ],
+        "one_time_keyboard" : false,
+        "resize_keyboard" : true
+    }, {
+        "id" : "yes",
+        "on" : "Yes, I love you! ❤️",
+        "handler_type" : "MESSAGE",
+        "response_type" : "TEXT",
+        "response" : "Amazing 😀! Thank you!",
+        "keyboard_options" : [
+            ["starme"], 
+            ["close"]
+        ],
+        "one_time_keyboard" : false,
+        "resize_keyboard" : true
+    }, {
+        "id" : "no",
+        "on" : "No, you are useless! 💢",
+        "handler_type" : "MESSAGE",
+        "response_type" : "TEXT",
+        "response" : "Oh, this is embarrassing... 😅",
+        "keyboard_options" : [
+            ["openissue"], 
+            ["close"]
+        ],
+        "one_time_keyboard" : false,
+        "resize_keyboard" : true
+    }, {
+        "id" : "openissue",
+        "on" : "Report an issue ⚠️",
+        "handler_type" : "MESSAGE",
+        "response_type" : "TEXT",
+        "response" : "Open an issue here: http://google.it",
+        "disable_web_page_preview" : false,
+        "keyboard_options" : [ 
+            ["close"]
+        ],
+        "one_time_keyboard" : false,
+        "resize_keyboard" : true
+    }, {
+        "id" : "starme",
+        "on" : "Star me! ⭐",
+        "handler_type" : "MESSAGE",
+        "response_type" : "TEXT",
+        "response" : "Give me a start here: http://google.it to share your positive opinion about me to the rest of the world.",
+        "disable_web_page_preview" : false,
+        "keyboard_options" : [ 
+            ["close"]
+        ],
+        "one_time_keyboard" : false,
+        "resize_keyboard" : true
+    }, {
+        "id" : "close",
+        "on" : "Close 🚫",
+        "exit_point" : true,
+        "keyboard_options" : null,
+        "response" : "Goodbye! 👋\n\nYou could restart this bot by sending /start again",
+        "handler_type" : "MESSAGE"
+    }, {
+        "id" : "invalid",
+        "on" : "[\\s\\S]",
+        "is_fallback" : true,
+        "handler_type" : "REGEX",
+        "response_type" : "TEXT",
+        "response" : "Ops! 😮\nInvalid input received. This message has been ignored by AutoBot"
+    }
+]
