@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="telegram-autobot",
-    version="0.0.3",
+    version="0.0.4",
     author="Andrea Cioni",
     author_email="cioni95@rocketmail.com",
     description="Build an interactive Telegram bot with some JSON files",
