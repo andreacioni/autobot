@@ -1,0 +1,17 @@
+language: python
+python:
+- '3.5'
+- '3.6'
+- '3.7'
+- '3.7-dev'
+install:
+- pip install -r requirements.txt
+deploy:
+  provider: pypi
+  user:
+    secure: q/EE+9/ENR3OsfnAdDTJXQoGxX5U1+tul13758x5W4/Qwk/Uf1FbJg53kQSTkdIeQQeJyQoSnjKBHY7O+7UjsCeybleAZUCJpZPJz8YEL+LeaSU3Bwx4znrRTt0Cw/WQPNL5wN/sQXIumu4wlkLCRWSMLSzDu1cNTAVmq9t81D4Vd/TOrhwWxXbdMuayFSDT4qD9MNUkzjT3BQsWvCM8y5hvEcVDYy2AHAW+UCNdJf2COTwIfmssGdoCQyuFSO39539K+kEPJDVblvQeYz3L9pGNljENKP7T5k84acdf/MzUuMksQAVbdy/k4LkVUSeer8TiKFv78yPBzPgSRB98eWcqr+9pfFvRNHU59FqW5g1gvjpkgJ747tqQlynR7PQUNatt1JEgYkQ4+oZ2jLdpHpdn2iJvWMFUe9E0CiF8POamWCXOatUa5bwoUCsYfvhEcdX9r3R0tcqPzpIwiUmrUTgia0nTY/AXaudJOY50GcD33gcXh57hMPixuFUxDvkh2jA34J96Y2crX+LotN/ItNTjrHtk1zV59Ka+oYK2gnV+y9i0+SsOmCU46QBnQibuSUUhWjWIopApslG58W46+Dg910nnozn/ZoOPpJB20wsbGGGITye4OOFwrY3ZJoyETLzyfWeYY1qynnDmgWyuukC9btf2VhXdGXkkFSXX+c8=
+  password:
+    secure: CILmVLF1j4+F0FKhxAaA4WY+HkxKpfhwXmd+p+wIE9G7YKBUr+gkwy8L/EgAgRHCysO4mOB49kC/7dsXS18m/taOuUcCslcW0ZHoa/Lp/ay3TjiFZk6RjtWj45BAwvqt2yswfQRbvMeq+HKQIDArDztmZgO3xbfgvEGNOyjPbtNN2ofFTtuk4GcKKv4vd6WmaUvV8Kh6EN+2d4Q1Jrr9EmQWfHzSsag6rmP/4pJnMi1VsIpEvtl07WXAevPwDLsoTNSgUF1ofxGW4lZSzOhrxPSsSbHpUPG0CtCtTPTxgRlvthZxXzsTngB5ueV3eJs0OeOr7oTGoHNXn08GAFDiJcY38POqQjxRuIWBBzWRYtJbCU0lsBy1beLEfoIvBP5fe9GyuDpm/AqJ6+8F3aUN1vs1565udQhEZSYbUmqpiwxbqecfns98VcxTPqllZYUC9zA0VcY8YzN/b2G4L60oZQ36Yp4jCFnkJtTQK9efd/4lvMKqvnH2PNw0EKSIQLZ8fBsMItrG+loXYnGP4JelvR35s1/03ERyjtaS4BTKH4bMPL/gFX4wphQRSzf4YZld4dmWQ60A4pBQFMdwjFkkpLMBjN03Ksd6JSi+XEIhIMSI7/5OqUZv75i5DtOCMWF3B4QCVE0Kz5mWtwFvaFJQ5Jid39ZKBRbJR4ai+DEg4BE=
+  skip_cleanup: true
+  on:
+    tags: true
