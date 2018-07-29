@@ -1,4 +1,3 @@
-autobot
 certifi>=2018.4.16
 python-telegram-bot>=9.0.0
 pycommon-andreacioni>=0.0.1
