@@ -41,9 +41,8 @@ class PhotoResponseHandler(ResponseHandler):
        
 
     def _handle_response(self, bot, update, response, response_type_opt):
-
         if isinstance(response, URLError):
-            bot.send_message(update.message.chat_id, response)
+            bot.send_message(update.message.chat_id, str(response))
         else:
             with open(response, 'rb') as photo_file:
                 if self._keyboard_markup:
