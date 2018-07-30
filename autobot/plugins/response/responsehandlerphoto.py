@@ -37,24 +37,29 @@ class PhotoResponseHandler(ResponseHandler):
             return filepath
         except URLError as e:
             self._logger.error(e)
+            return e
        
 
     def _handle_response(self, bot, update, response, response_type_opt):
-        with open(response, 'rb') as photo_file:
-            if self._keyboard_markup:
-                bot.send_photo(update.message.chat_id, \
-                                photo_file, \
-                                caption=response_type_opt[ResponseOptional.CAPTION], \
-                                reply_markup=self._keyboard_markup)
-            else:
-                bot.send_photo(update.message.chat_id, \
-                                    photo_file, \
-                                    caption=response_type_opt[ResponseOptional.CAPTION])
 
-        try:
-            remove(photo_file)
-        except OSError as e:
-            self._logger.error(e)
+        if isinstance(response, URLError):
+            bot.send_message(update.message.chat_id, response)
+        else:
+            with open(response, 'rb') as photo_file:
+                if self._keyboard_markup:
+                    bot.send_photo(update.message.chat_id, \
+                                    photo_file, \
+                                    caption=response_type_opt[ResponseOptional.CAPTION], \
+                                    reply_markup=self._keyboard_markup)
+                else:
+                    bot.send_photo(update.message.chat_id, \
+                                        photo_file, \
+                                        caption=response_type_opt[ResponseOptional.CAPTION])
+
+            try:
+                remove(photo_file)
+            except OSError as e:
+                self._logger.error(e)
     
     def _get_request(self, response, response_type_opt):
         if ResponseOptional.AUTH in response_type_opt \
