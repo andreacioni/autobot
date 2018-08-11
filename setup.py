@@ -1,11 +1,13 @@
 import setuptools
 
+from autobot.version import ver
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="telegram-autobot",
-    version="0.0.15",
+    version=ver,
     author="Andrea Cioni",
     author_email="cioni95@rocketmail.com",
     description="Build an interactive Telegram bot with some JSON files",
@@ -20,7 +22,7 @@ setuptools.setup(
     ),
     entry_points={
         'console_scripts': [
-            'autobot = run:main'
+            'autobot = autobot:main'
         ],
     }
 )

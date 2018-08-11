@@ -6,7 +6,6 @@ echo "Creating new version"
 
 CURRENT_VERSION=$(cat autobot/version/version.py | grep version | awk '{print $3}' | cut -d '"' -f 2)
 FILES=(
-    setup.py
     autobot/version/version.py
 )
 
