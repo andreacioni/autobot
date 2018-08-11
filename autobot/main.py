@@ -23,6 +23,7 @@ def main():
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', \
                     level=getattr(logging, args.log_level))
 
+    # This must be here because PluginsLoader need above components
     from autobot import AutoBot
 
     AutoBot(args.settings_file, args.config_dir).startup()
