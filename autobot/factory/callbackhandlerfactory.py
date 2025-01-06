@@ -73,7 +73,7 @@ class CallbackHandlerFactory(object):
         cls._logger.debug("Building regex handler for entry: %s", entry)
         return FilterRegexHandler(
             ids_filter,
-            entry[AutoBotConfig.ON],
+            entry[AutoBotConfig.ON],  # this is the regex pattern to match
             cls._build_response_handler(config, entry),
         )
 

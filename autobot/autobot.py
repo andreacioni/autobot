@@ -96,7 +96,7 @@ class AutoBot(object):
         )
 
         if pyversion.major < 3:
-            self._logger.warn(
+            self._logger.warning(
                 "Detected Python version 2.x, consider to switch to newer version"
             )
 

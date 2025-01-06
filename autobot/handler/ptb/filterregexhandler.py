@@ -2,6 +2,7 @@
 
 """ This module contains custom filters used by AutoBot module """
 
+from telegram import Update
 from telegram.ext import StringRegexHandler
 
 
@@ -12,16 +13,16 @@ class FilterRegexHandler(StringRegexHandler):
         StringRegexHandler.__init__(self, *args, **kwargs)
         self.filters = filters
 
-    def check_update(self, update):
-        if StringRegexHandler.check_update(self, update):
+    def check_update(self, update: Update):
+        if StringRegexHandler.check_update(self, update.message.text):
             if not self.filters:
                 res = True
             else:
                 message = update.effective_message
                 if isinstance(self.filters, list):
-                    res = any(func(message) for func in self.filters)
+                    res = any(filter.check_update(message) for filter in self.filters)
                 else:
-                    res = self.filters(message)
+                    res = self.filters.check_update(message)
         else:
             res = False
         return res
