@@ -18,11 +18,10 @@ class FilterRegexHandler(StringRegexHandler):
             if not self.filters:
                 res = True
             else:
-                message = update.effective_message
                 if isinstance(self.filters, list):
-                    res = any(filter.check_update(message) for filter in self.filters)
+                    res = any(filter.check_update(update) for filter in self.filters)
                 else:
-                    res = self.filters.check_update(message)
+                    res = self.filters.check_update(update)
         else:
             res = False
         return res
