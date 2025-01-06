@@ -1,12 +1,14 @@
 import logging
 
-from telegram.ext import ConversationHandler
+from telegram.ext import ConversationHandler, CallbackContext
+from telegram import Update
 
 from autobot import AutoBotConstants
 from autobot.configuration import AutoBotConfig
 from autobot.plugins import PluginsLoader
 
 from .replymarkupbuilder import ReplyMarkupBuilder
+
 
 class ResponseHandler(object):
 
@@ -17,22 +19,29 @@ class ResponseHandler(object):
 
         self._keyboard_markup = ReplyMarkupBuilder.build_keyboard(config, entry)
 
-        self._logger.debug('Built keyboard is: %s', self._keyboard_markup)
+        self._logger.debug("Built keyboard is: %s", self._keyboard_markup)
 
-        def handler(bot, update):
+        def handler(update: Update, ctx: CallbackContext):
             self._log_msg(update.message)
 
-            response = self._build_response(entry[AutoBotConfig.RESPONSE],
-                                  entry[AutoBotConfig.RESPONSE_TYPE_OPTIONS],
-                                  update)
+            response = self._build_response(
+                entry[AutoBotConfig.RESPONSE],
+                entry[AutoBotConfig.RESPONSE_TYPE_OPTIONS],
+                update,
+            )
 
-            self._logger.debug('Built response is: %s', response)
+            self._logger.debug("Built response is: %s", response)
 
             if not response:
                 self._logger.warning("Empty response built. No answer will be sent")
             else:
-                self._handle_response(bot, update, response, entry[AutoBotConfig.RESPONSE_TYPE_OPTIONS])
-            
+                self._handle_response(
+                    ctx.bot,
+                    update,
+                    response,
+                    entry[AutoBotConfig.RESPONSE_TYPE_OPTIONS],
+                )
+
             return self._get_to_group(entry)
 
         return handler
@@ -46,27 +55,29 @@ class ResponseHandler(object):
     @classmethod
     def check_options(cls, entry_id, response_type_opt):
         raise NotImplementedError
-    
+
     @classmethod
     def set_default_options(cls, entry_id, response_type_opt):
         raise NotImplementedError
 
     def _log_msg(self, message):
-        """ Log incoming message """
-        self._logger.debug('%s message received from user: %s. ChatID: %s', \
-                            message.text, \
-                            message.from_user.name, \
-                            message.chat.id)
+        """Log incoming message"""
+        self._logger.debug(
+            "%s message received from user: %s. ChatID: %s",
+            message.text,
+            message.from_user.name,
+            message.chat.id,
+        )
 
-    def _get_to_group(self ,entry):
+    def _get_to_group(self, entry):
         ret = None
         if entry[AutoBotConfig.EXIT_POINT]:
             ret = ConversationHandler.END
         else:
             if entry[AutoBotConfig.TO_GROUP]:
                 ret = entry[AutoBotConfig.TO_GROUP]
-            #else, if TO_GROUP is "None" the destination group doesn't change
-        
+            # else, if TO_GROUP is "None" the destination group doesn't change
+
         self._logger.debug("To group: %s", ret)
-        
+
         return ret
