@@ -10,6 +10,7 @@ from autobot.filters import IdFilter, TextEqualsFilter
 from autobot.plugins import PluginsLoader
 
 from telegram.ext import CommandHandler, MessageHandler
+from telegram.ext import filters
 
 
 class CallbackHandlerFactory(object):

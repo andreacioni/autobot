@@ -48,14 +48,14 @@ class PhotoResponseHandler(ResponseHandler):
         else:
             with open(response, "rb") as photo_file:
                 if self._keyboard_markup:
-                    bot.send_photo(
+                    await bot.send_photo(
                         update.message.chat_id,
                         photo_file,
                         caption=response_type_opt[ResponseOptional.CAPTION],
                         reply_markup=self._keyboard_markup,
                     )
                 else:
-                    bot.send_photo(
+                    await bot.send_photo(
                         update.message.chat_id,
                         photo_file,
                         caption=response_type_opt[ResponseOptional.CAPTION],
