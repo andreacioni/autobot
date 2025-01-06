@@ -8,6 +8,7 @@ class TextEqualsFilter(BaseFilter):
 
     def __init__(self, text):
         self._text = text
+        BaseFilter.__init__(self)
 
     def filter(self, message):
         return bool(message.text) and (self._text == message.text)

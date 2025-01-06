@@ -13,6 +13,7 @@ class IdFilter(BaseFilter):
         self._logger = logging.getLogger(__name__)
         self._allowed = allowed
         self._restrict = restrict
+        BaseFilter.__init__(self)
 
     def filter(self, message):
         if not (self._restrict and (message.chat.id in self._allowed)):
