@@ -21,7 +21,7 @@ class ResponseHandler(object):
 
         self._logger.debug("Built keyboard is: %s", self._keyboard_markup)
 
-        def handler(update: Update, ctx: CallbackContext):
+        async def handler(update: Update, ctx: CallbackContext) -> None:
             self._log_msg(update.message)
 
             response = self._build_response(
@@ -35,7 +35,7 @@ class ResponseHandler(object):
             if not response:
                 self._logger.warning("Empty response built. No answer will be sent")
             else:
-                self._handle_response(
+                await self._handle_response(
                     ctx.bot,
                     update,
                     response,
@@ -46,7 +46,7 @@ class ResponseHandler(object):
 
         return handler
 
-    def _handle_response(self, bot, update, response, response_type_opt):
+    async def _handle_response(self, bot, update, response, response_type_opt) -> None:
         raise NotImplementedError
 
     def _build_response(self, response, response_type_opt, udpate):
