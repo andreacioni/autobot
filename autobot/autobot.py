@@ -103,7 +103,10 @@ class AutoBot(object):
         # Create the EventHandler and pass it your bot's token.
         self._logger.info("Creating updater...")
         app = (
-            ApplicationBuilder().token(self._settings[AutoBotSettings.API_KEY]).build()
+            ApplicationBuilder()
+            .token(self._settings[AutoBotSettings.API_KEY])
+            .concurrent_updates(self._settings[AutoBotSettings.WORKERS])
+            .build()
         )
 
         # Register handlers to the dispatcher object
